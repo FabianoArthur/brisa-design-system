@@ -48,6 +48,7 @@ export function Button({
         `br-button--${variant}`,
         `br-button--${size}`,
         fullWidth && 'br-button--full',
+        icon && !children ? 'br-button--icon-only' : false,
         loading && 'br-button--loading',
         className,
       )}
@@ -66,7 +67,7 @@ export function Button({
           </span>
         )
       )}
-      <span className="br-button__label">{children}</span>
+      {children !== undefined && <span className="br-button__label">{children}</span>}
     </button>
   );
 }

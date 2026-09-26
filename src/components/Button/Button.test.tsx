@@ -65,3 +65,12 @@ describe('Button', () => {
     await expectNoA11yViolations(container);
   });
 });
+
+describe('Button (icon-only)', () => {
+  it('renders square and takes its name from aria-label', () => {
+    render(<Button aria-label="Close" icon={<svg />} />);
+    const btn = screen.getByRole('button', { name: 'Close' });
+    expect(btn).toHaveClass('br-button--icon-only');
+    expect(btn.querySelector('.br-button__label')).toBeNull();
+  });
+});

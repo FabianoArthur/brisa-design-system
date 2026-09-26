@@ -76,6 +76,19 @@
   font-size: var(--br-text-md);
 }
 
+.br-button--icon-only {
+  width: var(--br-control-md);
+  padding: 0;
+}
+
+.br-button--sm.br-button--icon-only {
+  width: var(--br-control-sm);
+}
+
+.br-button--lg.br-button--icon-only {
+  width: var(--br-control-lg);
+}
+
 .br-button--full {
   width: 100%;
 }
