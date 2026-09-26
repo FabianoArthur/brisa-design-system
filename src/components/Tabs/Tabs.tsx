@@ -1,5 +1,7 @@
 import {
+  Children,
   createContext,
+  isValidElement,
   useContext,
   useId,
   useState,
@@ -33,10 +35,26 @@ export interface TabsProps {
   className?: string;
 }
 
-/** WAI-ARIA Tabs pattern with automatic activation and a roving tabindex. */
+/** Value of the first enabled <Tab> inside the first <TabList>, if any. */
+function firstEnabledTab(children: ReactNode): string | undefined {
+  for (const child of Children.toArray(children)) {
+    if (!isValidElement<{ children?: ReactNode }>(child) || child.type !== TabList) continue;
+    for (const tab of Children.toArray(child.props.children)) {
+      if (isValidElement<TabProps>(tab) && tab.type === Tab && !tab.props.disabled) {
+        return tab.props.value;
+      }
+    }
+  }
+  return undefined;
+}
+
+/**
+ * WAI-ARIA Tabs pattern with automatic activation and a roving tabindex.
+ * Without `value`/`defaultValue`, the first enabled tab starts selected.
+ */
 export function Tabs({ children, value, defaultValue, onValueChange, className }: TabsProps) {
   const baseId = useId();
-  const [internal, setInternal] = useState(defaultValue);
+  const [internal, setInternal] = useState(() => defaultValue ?? firstEnabledTab(children));
   const current = value !== undefined ? value : internal;
   const select = (next: string) => {
     if (value === undefined) setInternal(next);

@@ -20,19 +20,23 @@ describe('readStoredMode', () => {
     expect(readStoredMode(store('light'), 'k')).toBe('light');
   });
 
-  it('falls back to system for missing or garbage values', () => {
-    expect(readStoredMode(store(null), 'k')).toBe('system');
-    expect(readStoredMode(store('purple'), 'k')).toBe('system');
-    expect(readStoredMode(undefined, 'k')).toBe('system');
+  it('returns an explicitly stored "system"', () => {
+    expect(readStoredMode(store('system'), 'k')).toBe('system');
   });
 
-  it('falls back to system when storage throws (private mode, blocked cookies)', () => {
+  it('returns null for missing or garbage values', () => {
+    expect(readStoredMode(store(null), 'k')).toBeNull();
+    expect(readStoredMode(store('purple'), 'k')).toBeNull();
+    expect(readStoredMode(undefined, 'k')).toBeNull();
+  });
+
+  it('returns null when storage throws (private mode, blocked cookies)', () => {
     const throwing = {
       getItem: () => {
         throw new DOMException('denied', 'SecurityError');
       },
     };
-    expect(readStoredMode(throwing, 'k')).toBe('system');
+    expect(readStoredMode(throwing, 'k')).toBeNull();
   });
 });
 

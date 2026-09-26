@@ -70,6 +70,38 @@ describe('Tabs', () => {
     expect(screen.getByRole('tabpanel')).toHaveTextContent('Activity panel');
   });
 
+  it('falls back to the first enabled tab when no value is given', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="Fallback">
+          <Tab value="a" disabled>
+            A
+          </Tab>
+          <Tab value="b">B</Tab>
+          <Tab value="c">C</Tab>
+        </TabList>
+        <TabPanel value="a">Panel A</TabPanel>
+        <TabPanel value="b">Panel B</TabPanel>
+        <TabPanel value="c">Panel C</TabPanel>
+      </Tabs>,
+    );
+    expect(screen.getByRole('tab', { name: 'B' })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tab', { name: 'B' })).toHaveAttribute('tabindex', '0');
+    expect(screen.getByRole('tabpanel')).toHaveTextContent('Panel B');
+  });
+
+  it('keeps ids valid for values with spaces', () => {
+    render(
+      <Tabs defaultValue="two words">
+        <TabList aria-label="Spaces">
+          <Tab value="two words">Two words</Tab>
+        </TabList>
+        <TabPanel value="two words">Panel</TabPanel>
+      </Tabs>,
+    );
+    expect(screen.getByRole('tabpanel', { name: 'Two words' })).toBeInTheDocument();
+  });
+
   it('has no axe violations', async () => {
     const { container } = render(<Example />);
     await expectNoA11yViolations(container);

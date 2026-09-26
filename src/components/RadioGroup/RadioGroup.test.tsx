@@ -38,6 +38,17 @@ describe('RadioGroup', () => {
     expect(screen.getByRole('radio', { name: 'Express' })).toHaveAccessibleDescription('Next day');
   });
 
+  it('keeps descriptions wired when values contain spaces', () => {
+    render(
+      <RadioGroup
+        legend="Size"
+        name="size"
+        options={[{ value: 'extra large', label: 'XL', description: 'Fits most' }]}
+      />,
+    );
+    expect(screen.getByRole('radio', { name: 'XL' })).toHaveAccessibleDescription('Fits most');
+  });
+
   it('has no axe violations', async () => {
     const { container } = render(
       <RadioGroup legend="Shipping" name="ship" options={options} defaultValue="std" />,

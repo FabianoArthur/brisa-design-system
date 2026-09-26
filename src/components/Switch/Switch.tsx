@@ -1,4 +1,4 @@
-import { useId, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { useId, useState, type ButtonHTMLAttributes, type MouseEvent, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 
 export interface SwitchProps extends Omit<
@@ -20,6 +20,7 @@ export function Switch({
   disabled,
   id,
   className,
+  onClick,
   ...rest
 }: SwitchProps) {
   const autoId = useId();
@@ -28,8 +29,9 @@ export function Switch({
   const isControlled = checked !== undefined;
   const on = isControlled ? checked : internal;
 
-  const toggle = () => {
-    if (disabled) return;
+  const toggle = (e: MouseEvent<HTMLButtonElement>) => {
+    onClick?.(e);
+    if (disabled || e.defaultPrevented) return;
     if (!isControlled) setInternal(!on);
     onCheckedChange?.(!on);
   };
@@ -37,6 +39,7 @@ export function Switch({
   return (
     <div className={cx('br-switch', className)}>
       <button
+        {...rest}
         id={switchId}
         type="button"
         role="switch"
@@ -44,7 +47,6 @@ export function Switch({
         disabled={disabled}
         className="br-switch__track"
         onClick={toggle}
-        {...rest}
       >
         <span className="br-switch__thumb" aria-hidden="true" />
       </button>

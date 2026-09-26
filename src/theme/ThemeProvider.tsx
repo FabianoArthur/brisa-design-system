@@ -27,7 +27,10 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
+const isBrowser = typeof window !== 'undefined';
+
 function safeStorage(): Storage | undefined {
+  if (!isBrowser) return undefined;
   try {
     return window.localStorage;
   } catch {
@@ -52,11 +55,13 @@ export function ThemeProvider({
   storageKey = 'brisa-theme',
   defaultMode = 'system',
 }: ThemeProviderProps) {
-  const [mode, setModeState] = useState<ThemeMode>(() => {
-    const stored = readStoredMode(safeStorage(), storageKey);
-    return stored === 'system' ? defaultMode : stored;
-  });
-  const [prefersDark, setPrefersDark] = useState(() => window.matchMedia(DARK_QUERY).matches);
+  const [mode, setModeState] = useState<ThemeMode>(
+    () => readStoredMode(safeStorage(), storageKey) ?? defaultMode,
+  );
+  // SSR-safe: on the server there is no OS preference, so assume light.
+  const [prefersDark, setPrefersDark] = useState(
+    () => isBrowser && window.matchMedia(DARK_QUERY).matches,
+  );
 
   useEffect(() => {
     const mql = window.matchMedia(DARK_QUERY);

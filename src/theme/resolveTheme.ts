@@ -12,16 +12,16 @@ export function resolveTheme(mode: ThemeMode, prefersDark: boolean): ResolvedThe
   return mode;
 }
 
-/** Reads a stored mode. Any failure (missing, invalid, storage blocked) means "system". */
+/** Reads a stored mode; null when nothing valid is stored or storage is blocked. */
 export function readStoredMode(
   storage: Pick<Storage, 'getItem'> | undefined,
   key: string,
-): ThemeMode {
+): ThemeMode | null {
   try {
     const value = storage?.getItem(key);
-    return isThemeMode(value) ? value : 'system';
+    return isThemeMode(value) ? value : null;
   } catch {
-    return 'system';
+    return null;
   }
 }
 

@@ -76,6 +76,27 @@ describe('ThemeProvider', () => {
     expect(screen.getByText('dark/dark')).toBeInTheDocument();
   });
 
+  it('respects a stored "system" choice over a non-system defaultMode', () => {
+    mockMatchMedia(false);
+    localStorage.setItem('t', 'system');
+    render(
+      <ThemeProvider storageKey="t" defaultMode="dark">
+        <Probe />
+      </ThemeProvider>,
+    );
+    expect(screen.getByText('system/light')).toBeInTheDocument();
+  });
+
+  it('uses defaultMode when nothing is stored', () => {
+    mockMatchMedia(false);
+    render(
+      <ThemeProvider storageKey="t" defaultMode="dark">
+        <Probe />
+      </ThemeProvider>,
+    );
+    expect(screen.getByText('dark/dark')).toBeInTheDocument();
+  });
+
   it('throws a helpful error when useTheme is used outside the provider', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
     expect(() => render(<Probe />)).toThrow(/ThemeProvider/);

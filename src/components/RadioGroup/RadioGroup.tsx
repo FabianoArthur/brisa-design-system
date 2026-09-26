@@ -42,7 +42,7 @@ export function RadioGroup({
       <legend className="br-radio-group__legend">{legend}</legend>
       <div className="br-radio-group__options">
         {options.map((o) => {
-          const inputId = `br-radio-${groupId}-${o.value}`;
+          const inputId = `br-radio-${groupId}-${o.value.replace(/[^\w-]/g, '_')}`;
           const descId = o.description ? `${inputId}-desc` : undefined;
           return (
             <div key={o.value} className="br-check br-check--radio">

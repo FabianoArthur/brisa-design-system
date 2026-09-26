@@ -4,7 +4,6 @@ import {
   useId,
   useState,
   type FocusEvent,
-  type MouseEvent,
   type ReactElement,
   type ReactNode,
 } from 'react';
@@ -14,8 +13,6 @@ type TriggerProps = {
   'aria-describedby'?: string;
   onFocus?: (e: FocusEvent<HTMLElement>) => void;
   onBlur?: (e: FocusEvent<HTMLElement>) => void;
-  onMouseEnter?: (e: MouseEvent<HTMLElement>) => void;
-  onMouseLeave?: (e: MouseEvent<HTMLElement>) => void;
 };
 
 export interface TooltipProps {
@@ -43,14 +40,18 @@ export function Tooltip({ content, children, placement = 'top', delay = 300 }: T
     return () => window.clearTimeout(timer);
   }, [hovering, delay]);
 
-  // Esc dismisses without moving focus (WCAG 1.4.13 "dismissible").
+  // Esc dismisses without moving focus (WCAG 1.4.13 "dismissible"). Captured
+  // and consumed, so the first Esc closes the tooltip and not an enclosing Dialog.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setDismissed(true);
+      if (e.key !== 'Escape') return;
+      e.preventDefault();
+      e.stopPropagation();
+      setDismissed(true);
     };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
+    window.addEventListener('keydown', onKey, true);
+    return () => window.removeEventListener('keydown', onKey, true);
   }, [open]);
 
   const child = children.props;
@@ -65,20 +66,22 @@ export function Tooltip({ content, children, placement = 'top', delay = 300 }: T
       child.onBlur?.(e);
       setFocused(false);
     },
-    onMouseEnter: (e: MouseEvent<HTMLElement>) => {
-      child.onMouseEnter?.(e);
-      setDismissed(false);
-      setHovering(true);
-    },
-    onMouseLeave: (e: MouseEvent<HTMLElement>) => {
-      child.onMouseLeave?.(e);
-      setHovering(false);
-      setHoverReady(false);
-    },
   });
 
+  // Hover handlers live on the wrapper, which also contains the bubble, so the
+  // pointer can move onto the tooltip without it vanishing (WCAG 1.4.13 "hoverable").
   return (
-    <span className="br-tooltip">
+    <span
+      className="br-tooltip"
+      onMouseEnter={() => {
+        setDismissed(false);
+        setHovering(true);
+      }}
+      onMouseLeave={() => {
+        setHovering(false);
+        setHoverReady(false);
+      }}
+    >
       {trigger}
       {open && (
         <span

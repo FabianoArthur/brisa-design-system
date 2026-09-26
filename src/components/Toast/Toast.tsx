@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useId,
   useMemo,
   useReducer,
   useRef,
@@ -34,15 +35,15 @@ export interface ToastProviderProps {
   max?: number;
 }
 
-let counter = 0;
-
 export function ToastProvider({ children, duration = 5000, max = 5 }: ToastProviderProps) {
   const [toasts, dispatch] = useReducer(toastReducer, []);
+  const prefix = useId();
+  const counter = useRef(0);
 
   const dismiss = useCallback((id: string) => dispatch({ type: 'remove', id }), []);
   const toast = useCallback(
     ({ title, description, tone = 'info', duration: d }: ToastOptions) => {
-      const id = `br-toast-${++counter}`;
+      const id = `${prefix}-toast-${++counter.current}`;
       dispatch({
         type: 'add',
         toast: { id, title, description, tone, duration: d ?? duration },
@@ -50,7 +51,7 @@ export function ToastProvider({ children, duration = 5000, max = 5 }: ToastProvi
       });
       return id;
     },
-    [duration, max],
+    [duration, max, prefix],
   );
   const value = useMemo(() => ({ toast, dismiss }), [toast, dismiss]);
 

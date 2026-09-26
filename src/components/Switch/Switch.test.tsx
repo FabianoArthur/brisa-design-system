@@ -46,6 +46,14 @@ describe('Switch', () => {
     expect(onCheckedChange).not.toHaveBeenCalled();
   });
 
+  it('calls a consumer onClick without losing the toggle', async () => {
+    const onClick = vi.fn();
+    render(<Switch label="Wi-Fi" onClick={onClick} />);
+    await userEvent.click(screen.getByRole('switch'));
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(screen.getByRole('switch')).toHaveAttribute('aria-checked', 'true');
+  });
+
   it('has no axe violations', async () => {
     const { container } = render(<Switch label="Wi-Fi" defaultChecked />);
     await expectNoA11yViolations(container);
