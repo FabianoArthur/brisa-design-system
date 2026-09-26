@@ -1,0 +1,5 @@
+dist
+site-dist
+coverage
+package-lock.json
+docs/assets
