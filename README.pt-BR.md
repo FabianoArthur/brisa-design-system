@@ -29,7 +29,7 @@ documentados num site em que todo exemplo é interativo e toda página funciona 
 
 ## Por que é interessante
 
-- **Acessibilidade testada, não prometida.** O arquivo de teste de cada componente roda o
+- **Acessibilidade testada, não prometida.** Todo componente é coberto por uma checagem do
   [axe-core](https://github.com/dequelabs/axe-core), e o comportamento de teclado (tabindex itinerante nas abas, Esc no
   Dialog e no Tooltip, Espaço/Enter no Switch) é exercitado com o `user-event` da Testing Library.
 - **A paleta é um contrato.** Um teste lê o `tokens.css`, resolve as cores semânticas de cada tema e confere as

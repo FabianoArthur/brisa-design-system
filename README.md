@@ -29,7 +29,7 @@ Brisa (Portuguese for _breeze_) is a small design system: a set of **design toke
 
 ## Why it is interesting
 
-- **Accessibility is tested, not promised.** Every component's test file runs [axe-core](https://github.com/dequelabs/axe-core),
+- **Accessibility is tested, not promised.** Every component is covered by an [axe-core](https://github.com/dequelabs/axe-core) check,
   and keyboard behaviour (roving tabindex in Tabs, Esc in Dialog and Tooltip, Space/Enter in Switch) is exercised with
   Testing Library's `user-event`.
 - **The palette is a contract.** A test parses `tokens.css`, resolves every theme's semantic colours and asserts

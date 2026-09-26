@@ -661,7 +661,7 @@ toast({ title: 'Changes saved', description: 'Your profile is up to date.', tone
       {
         name: 'Tabs value / defaultValue / onValueChange',
         type: 'string',
-        description: 'Controlled or uncontrolled selection.',
+        description: 'Controlled or uncontrolled selection. Defaults to the first enabled tab.',
       },
       {
         name: 'TabList aria-label',
