@@ -1,0 +1,59 @@
+.br-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.br-tooltip__bubble {
+  position: absolute;
+  left: 50%;
+  z-index: var(--br-z-tooltip);
+  width: max-content;
+  max-width: 16rem;
+  padding: var(--br-space-1) var(--br-space-2);
+  font-size: var(--br-text-xs);
+  font-weight: var(--br-weight-medium);
+  line-height: var(--br-leading-normal);
+  color: var(--br-color-tooltip-text);
+  background: var(--br-color-tooltip-bg);
+  border-radius: var(--br-radius-sm);
+  box-shadow: var(--br-shadow-md);
+  translate: -50% 0;
+  animation: br-tooltip-in var(--br-duration-fast) var(--br-ease-out);
+}
+
+.br-tooltip__bubble--top {
+  bottom: calc(100% + 6px);
+}
+
+.br-tooltip__bubble--bottom {
+  top: calc(100% + 6px);
+}
+
+/* Invisible bridge over the 6px gap so the pointer can travel to the bubble. */
+.br-tooltip__bubble::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 8px;
+}
+
+.br-tooltip__bubble--top::before {
+  top: 100%;
+}
+
+.br-tooltip__bubble--bottom::before {
+  bottom: 100%;
+}
+
+@keyframes br-tooltip-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .br-tooltip__bubble {
+    animation: none;
+  }
+}

@@ -1,0 +1,5 @@
+.br-textarea {
+  min-height: calc(var(--br-control-md) * 2);
+  line-height: var(--br-leading-normal);
+  resize: vertical;
+}

@@ -1,0 +1,219 @@
+/*
+ * Brisa design tokens.
+ * Layer 1 — primitives: raw palette and scales. Never used directly by components.
+ * Layer 2 — semantic: what components consume. Re-mapped per theme.
+ * Semantic colours are always plain var(--primitive) references so the palette
+ * contract test (contrast.test.ts) can resolve and check them.
+ */
+
+:root {
+  /* Neutrals (cool grey) */
+  --br-neutral-0: #ffffff;
+  --br-neutral-25: #f7f8fa;
+  --br-neutral-50: #f1f3f6;
+  --br-neutral-100: #e4e7ec;
+  --br-neutral-200: #cfd4dc;
+  --br-neutral-300: #b0b7c3;
+  --br-neutral-400: #8a93a3;
+  --br-neutral-500: #69727f;
+  --br-neutral-600: #525a66;
+  --br-neutral-700: #3b424c;
+  --br-neutral-800: #262b33;
+  --br-neutral-850: #1d2127;
+  --br-neutral-900: #15181d;
+  --br-neutral-950: #0e1014;
+  --br-neutral-975: #0a0b0e;
+
+  /* Accent (sea teal) */
+  --br-teal-50: #e8f6f5;
+  --br-teal-100: #c6ebe8;
+  --br-teal-200: #93d9d2;
+  --br-teal-300: #5fc4bb;
+  --br-teal-400: #2fb0a5;
+  --br-teal-600: #0f766f;
+  --br-teal-700: #0b5e58;
+  --br-teal-900: #083a37;
+
+  /* Status */
+  --br-green-50: #eaf6ee;
+  --br-green-300: #7fd79f;
+  --br-green-700: #1a6b3a;
+  --br-green-950: #10301d;
+  --br-amber-50: #fdf4e3;
+  --br-amber-300: #f2c26b;
+  --br-amber-800: #7a4b00;
+  --br-amber-950: #3a2a0b;
+  --br-red-50: #fdeeee;
+  --br-red-300: #ff9a9a;
+  --br-red-400: #f07070;
+  --br-red-600: #c42b2b;
+  --br-red-700: #a51d1d;
+  --br-red-950: #3a1414;
+  --br-blue-50: #ebf1fd;
+  --br-blue-300: #8db4ff;
+  --br-blue-700: #1d4fa8;
+  --br-blue-950: #13254a;
+
+  /* Typography */
+  --br-font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --br-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --br-text-xs: 0.75rem;
+  --br-text-sm: 0.875rem;
+  --br-text-md: 1rem;
+  --br-text-lg: 1.125rem;
+  --br-text-xl: 1.375rem;
+  --br-text-2xl: 1.75rem;
+  --br-text-3xl: 2.25rem;
+  --br-leading-tight: 1.25;
+  --br-leading-normal: 1.5;
+  --br-weight-regular: 400;
+  --br-weight-medium: 500;
+  --br-weight-semibold: 600;
+  --br-weight-bold: 700;
+
+  /* Spacing (4px grid) */
+  --br-space-0: 0;
+  --br-space-1: 0.25rem;
+  --br-space-2: 0.5rem;
+  --br-space-3: 0.75rem;
+  --br-space-4: 1rem;
+  --br-space-5: 1.25rem;
+  --br-space-6: 1.5rem;
+  --br-space-8: 2rem;
+  --br-space-10: 2.5rem;
+  --br-space-12: 3rem;
+  --br-space-16: 4rem;
+
+  /* Radius */
+  --br-radius-sm: 4px;
+  --br-radius-md: 8px;
+  --br-radius-lg: 12px;
+  --br-radius-xl: 16px;
+  --br-radius-full: 999px;
+
+  /* Motion */
+  --br-duration-fast: 120ms;
+  --br-duration-normal: 200ms;
+  --br-duration-slow: 320ms;
+  --br-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --br-ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Layers */
+  --br-z-dropdown: 100;
+  --br-z-tooltip: 200;
+  --br-z-toast: 300;
+
+  /* Control sizes */
+  --br-control-sm: 2rem;
+  --br-control-md: 2.5rem;
+  --br-control-lg: 3rem;
+}
+
+/* ---------- Light theme (default) ---------- */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+  --br-color-bg: var(--br-neutral-0);
+  --br-color-surface: var(--br-neutral-0);
+  --br-color-surface-sunken: var(--br-neutral-50);
+  --br-color-surface-hover: var(--br-neutral-50);
+  --br-color-text: var(--br-neutral-900);
+  --br-color-text-muted: var(--br-neutral-600);
+  --br-color-border: var(--br-neutral-200);
+  --br-color-border-strong: var(--br-neutral-500);
+  --br-color-accent: var(--br-teal-600);
+  --br-color-accent-hover: var(--br-teal-700);
+  --br-color-accent-subtle: var(--br-teal-50);
+  --br-color-accent-text: var(--br-teal-700);
+  --br-color-on-accent: var(--br-neutral-0);
+  --br-color-focus: var(--br-teal-600);
+  --br-color-danger: var(--br-red-600);
+  --br-color-on-danger: var(--br-neutral-0);
+  --br-color-danger-text: var(--br-red-700);
+  --br-color-danger-surface: var(--br-red-50);
+  --br-color-success-text: var(--br-green-700);
+  --br-color-success-surface: var(--br-green-50);
+  --br-color-warning-text: var(--br-amber-800);
+  --br-color-warning-surface: var(--br-amber-50);
+  --br-color-info-text: var(--br-blue-700);
+  --br-color-info-surface: var(--br-blue-50);
+  --br-color-tooltip-bg: var(--br-neutral-900);
+  --br-color-tooltip-text: var(--br-neutral-0);
+  --br-color-backdrop: rgb(14 16 20 / 0.45);
+  --br-shadow-sm: 0 1px 2px rgb(14 16 20 / 0.06), 0 1px 1px rgb(14 16 20 / 0.04);
+  --br-shadow-md: 0 4px 12px rgb(14 16 20 / 0.08), 0 1px 3px rgb(14 16 20 / 0.06);
+  --br-shadow-lg: 0 16px 40px rgb(14 16 20 / 0.14), 0 2px 6px rgb(14 16 20 / 0.06);
+}
+
+/* ---------- Dark theme: follows the OS unless light is forced ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --br-color-bg: var(--br-neutral-950);
+    --br-color-surface: var(--br-neutral-900);
+    --br-color-surface-sunken: var(--br-neutral-975);
+    --br-color-surface-hover: var(--br-neutral-850);
+    --br-color-text: var(--br-neutral-50);
+    --br-color-text-muted: var(--br-neutral-300);
+    --br-color-border: var(--br-neutral-800);
+    --br-color-border-strong: var(--br-neutral-500);
+    --br-color-accent: var(--br-teal-400);
+    --br-color-accent-hover: var(--br-teal-300);
+    --br-color-accent-subtle: var(--br-teal-900);
+    --br-color-accent-text: var(--br-teal-300);
+    --br-color-on-accent: var(--br-neutral-950);
+    --br-color-focus: var(--br-teal-300);
+    --br-color-danger: var(--br-red-400);
+    --br-color-on-danger: var(--br-neutral-950);
+    --br-color-danger-text: var(--br-red-300);
+    --br-color-danger-surface: var(--br-red-950);
+    --br-color-success-text: var(--br-green-300);
+    --br-color-success-surface: var(--br-green-950);
+    --br-color-warning-text: var(--br-amber-300);
+    --br-color-warning-surface: var(--br-amber-950);
+    --br-color-info-text: var(--br-blue-300);
+    --br-color-info-surface: var(--br-blue-950);
+    --br-color-tooltip-bg: var(--br-neutral-100);
+    --br-color-tooltip-text: var(--br-neutral-950);
+    --br-color-backdrop: rgb(0 0 0 / 0.6);
+    --br-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --br-shadow-md: 0 4px 12px rgb(0 0 0 / 0.45), 0 1px 3px rgb(0 0 0 / 0.3);
+    --br-shadow-lg: 0 16px 40px rgb(0 0 0 / 0.55), 0 2px 6px rgb(0 0 0 / 0.3);
+  }
+}
+
+/* ---------- Dark theme: forced ---------- */
+[data-theme='dark'] {
+  color-scheme: dark;
+  --br-color-bg: var(--br-neutral-950);
+  --br-color-surface: var(--br-neutral-900);
+  --br-color-surface-sunken: var(--br-neutral-975);
+  --br-color-surface-hover: var(--br-neutral-850);
+  --br-color-text: var(--br-neutral-50);
+  --br-color-text-muted: var(--br-neutral-300);
+  --br-color-border: var(--br-neutral-800);
+  --br-color-border-strong: var(--br-neutral-500);
+  --br-color-accent: var(--br-teal-400);
+  --br-color-accent-hover: var(--br-teal-300);
+  --br-color-accent-subtle: var(--br-teal-900);
+  --br-color-accent-text: var(--br-teal-300);
+  --br-color-on-accent: var(--br-neutral-950);
+  --br-color-focus: var(--br-teal-300);
+  --br-color-danger: var(--br-red-400);
+  --br-color-on-danger: var(--br-neutral-950);
+  --br-color-danger-text: var(--br-red-300);
+  --br-color-danger-surface: var(--br-red-950);
+  --br-color-success-text: var(--br-green-300);
+  --br-color-success-surface: var(--br-green-950);
+  --br-color-warning-text: var(--br-amber-300);
+  --br-color-warning-surface: var(--br-amber-950);
+  --br-color-info-text: var(--br-blue-300);
+  --br-color-info-surface: var(--br-blue-950);
+  --br-color-tooltip-bg: var(--br-neutral-100);
+  --br-color-tooltip-text: var(--br-neutral-950);
+  --br-color-backdrop: rgb(0 0 0 / 0.6);
+  --br-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --br-shadow-md: 0 4px 12px rgb(0 0 0 / 0.45), 0 1px 3px rgb(0 0 0 / 0.3);
+  --br-shadow-lg: 0 16px 40px rgb(0 0 0 / 0.55), 0 2px 6px rgb(0 0 0 / 0.3);
+}

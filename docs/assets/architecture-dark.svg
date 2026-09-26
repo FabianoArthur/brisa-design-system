@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" width="880" height="470" role="img" aria-labelledby="title desc" lang="en">
+<title id="title">How Brisa is built</title>
+<desc id="desc">Design tokens in tokens.css define primitives and semantic colours. Themes (light, dark or system) remap the semantic tokens through a data-theme attribute on the html element. Sixteen React and TypeScript components read only semantic tokens and are consumed by your app and by the docs site. The quality gate tests every component with Vitest and Testing Library, runs axe-core accessibility checks and a WCAG contrast contract over the tokens; GitHub Actions CI runs lint, typecheck, tests, build and gitleaks, and on main a Pages workflow deploys the docs site.</desc>
+<style>
+text{font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;fill:#f1f3f6}
+.b{font-size:14.5px;font-weight:600}.m{font-size:12.5px;fill:#b0b7c3}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px}
+.c{font-size:11.5px;font-weight:600;fill:#5fc4bb}
+.h{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.lbl{font-size:11.5px;fill:#b0b7c3;font-style:italic}
+.bg{fill:#0e1014;stroke:#262b33}.card{fill:#15181d;stroke:#3b424c}
+.zone{fill:#0b2624;stroke:#0b5e58}.lane{fill:#15181d;stroke:#3b424c;stroke-dasharray:5 4}
+.chip{fill:#0e1014;stroke:#0b5e58}
+.e{fill:none;stroke:#69727f;stroke-width:1.5;stroke-linejoin:round}
+.hl{fill:none;stroke:#2fb0a5;stroke-width:2.25;stroke-linejoin:round;opacity:0}
+.dot{fill:#2fb0a5}.halo{fill:#2fb0a5;opacity:.25}.pk{opacity:0}
+@keyframes p0{0%,1.00%{opacity:0;transform:translate(196px,130px)}2.50%{opacity:1;transform:translate(196px,130px);animation-timing-function:linear}11.25%{opacity:1;transform:translate(256px,130px)}14.37%,100%{opacity:0;transform:translate(256px,130px)}}
+@keyframes h0{0%,1.25%{opacity:0}2.50%,11.25%{opacity:.9}18.75%,100%{opacity:0}}
+.p0{transform:translate(196px,130px);animation:p0 8s infinite both}
+.h0{animation:h0 8s infinite both}
+
+@keyframes p1{0%,11.00%{opacity:0;transform:translate(408px,130px)}12.50%{opacity:1;transform:translate(408px,130px);animation-timing-function:linear}21.25%{opacity:1;transform:translate(460px,130px)}24.38%,100%{opacity:0;transform:translate(460px,130px)}}
+@keyframes h1{0%,11.25%{opacity:0}12.50%,21.25%{opacity:.9}28.75%,100%{opacity:0}}
+.p1{transform:translate(408px,130px);animation:p1 8s infinite both}
+.h1{animation:h1 8s infinite both}
+
+@keyframes p2{0%,21.00%{opacity:0;transform:translate(650px,100px)}22.50%{opacity:1;transform:translate(650px,100px);animation-timing-function:linear}30.00%{opacity:1;transform:translate(700px,100px)}33.13%,100%{opacity:0;transform:translate(700px,100px)}}
+@keyframes h2{0%,21.25%{opacity:0}22.50%,30.00%{opacity:.9}37.50%,100%{opacity:0}}
+.p2{transform:translate(650px,100px);animation:p2 8s infinite both}
+.h2{animation:h2 8s infinite both}
+
+@keyframes p3{0%,21.00%{opacity:0;transform:translate(650px,180px)}22.50%{opacity:1;transform:translate(650px,180px);animation-timing-function:linear}30.00%{opacity:1;transform:translate(700px,180px)}33.13%,100%{opacity:0;transform:translate(700px,180px)}}
+@keyframes h3{0%,21.25%{opacity:0}22.50%,30.00%{opacity:.9}37.50%,100%{opacity:0}}
+.p3{transform:translate(650px,180px);animation:p3 8s infinite both}
+.h3{animation:h3 8s infinite both}
+
+@keyframes p4{0%,31.00%{opacity:0;transform:translate(555px,190px)}32.50%{opacity:1;transform:translate(555px,190px);animation-timing-function:linear}35.02%{opacity:1;transform:translate(555px,262px);animation-timing-function:linear}47.97%{opacity:1;transform:translate(185px,262px);animation-timing-function:linear}50.00%{opacity:1;transform:translate(185px,320px)}53.13%,100%{opacity:0;transform:translate(185px,320px)}}
+@keyframes h4{0%,31.25%{opacity:0}32.50%,50.00%{opacity:.9}57.50%,100%{opacity:0}}
+.p4{transform:translate(555px,190px);animation:p4 8s infinite both}
+.h4{animation:h4 8s infinite both}
+
+@keyframes p5{0%,49.75%{opacity:0;transform:translate(330px,375px)}51.25%{opacity:1;transform:translate(330px,375px);animation-timing-function:linear}58.75%{opacity:1;transform:translate(370px,375px)}61.87%,100%{opacity:0;transform:translate(370px,375px)}}
+@keyframes h5{0%,50.00%{opacity:0}51.25%,58.75%{opacity:.9}66.25%,100%{opacity:0}}
+.p5{transform:translate(330px,375px);animation:p5 8s infinite both}
+.h5{animation:h5 8s infinite both}
+
+@keyframes p6{0%,58.50%{opacity:0;transform:translate(650px,375px)}60.00%{opacity:1;transform:translate(650px,375px);animation-timing-function:linear}67.50%{opacity:1;transform:translate(700px,375px)}70.63%,100%{opacity:0;transform:translate(700px,375px)}}
+@keyframes h6{0%,58.75%{opacity:0}60.00%,67.50%{opacity:.9}75.00%,100%{opacity:0}}
+.p6{transform:translate(650px,375px);animation:p6 8s infinite both}
+.h6{animation:h6 8s infinite both}
+
+@keyframes p7{0%,67.25%{opacity:0;transform:translate(778px,320px)}68.75%{opacity:1;transform:translate(778px,320px);animation-timing-function:linear}80.00%{opacity:1;transform:translate(778px,210px)}83.13%,100%{opacity:0;transform:translate(778px,210px)}}
+@keyframes h7{0%,67.50%{opacity:0}68.75%,80.00%{opacity:.9}87.50%,100%{opacity:0}}
+.p7{transform:translate(778px,320px);animation:p7 8s infinite both}
+.h7{animation:h7 8s infinite both}
+
+@media (prefers-reduced-motion:reduce){.pk,.hl{animation:none;display:none}}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#69727f"/></marker></defs>
+<rect x="0.5" y="0.5" width="879" height="469" rx="16" class="bg"/>
+<rect x="24" y="24" width="646" height="222" rx="14" class="zone"/>
+<text x="44" y="50" class="h" style="fill:#5fc4bb">library</text>
+<rect x="24" y="290" width="646" height="160" rx="14" class="lane"/>
+<text x="44" y="312" class="h" style="fill:#b0b7c3">quality gate</text>
+<rect x="40" y="70" width="156" height="120" rx="10" class="card"/>
+<text x="56" y="98" class="b">Design tokens</text>
+<text x="56" y="120" class="mono">tokens.css</text>
+<text x="56" y="146" class="m">primitives →</text>
+<text x="56" y="164" class="m">semantic tokens</text>
+<rect x="256" y="70" width="152" height="120" rx="10" class="card"/>
+<text x="272" y="98" class="b">Themes</text>
+<rect x="272" y="112" width="44" height="24" rx="12" class="chip"/><text x="294" y="128.5" class="c" text-anchor="middle">light</text>
+<rect x="322" y="112" width="50" height="24" rx="12" class="chip"/><text x="347" y="128.5" class="c" text-anchor="middle">dark</text>
+<rect x="272" y="142" width="62" height="24" rx="12" class="chip"/><text x="303" y="158.5" class="c" text-anchor="middle">system</text>
+<text x="272" y="182" class="m">via data-theme</text>
+<rect x="460" y="70" width="190" height="120" rx="10" class="card"/>
+<text x="476" y="98" class="b">Components</text>
+<text x="476" y="118" class="m">16 · React + TypeScript</text>
+<rect x="476" y="130" width="54" height="24" rx="12" class="chip"/><text x="503" y="146.5" class="c" text-anchor="middle">Button</text>
+<rect x="536" y="130" width="52" height="24" rx="12" class="chip"/><text x="562" y="146.5" class="c" text-anchor="middle">Dialog</text>
+<rect x="594" y="130" width="40" height="24" rx="12" class="chip"/><text x="614" y="146.5" class="c" text-anchor="middle">Tabs</text>
+<rect x="476" y="158" width="48" height="24" rx="12" class="chip"/><text x="500" y="174.5" class="c" text-anchor="middle">Toast</text>
+<rect x="530" y="158" width="48" height="24" rx="12" class="chip"/><text x="554" y="174.5" class="c" text-anchor="middle">Table</text>
+<text x="588" y="175" class="b">+11</text>
+<rect x="700" y="70" width="156" height="60" rx="10" class="card"/>
+<text x="716" y="95" class="b">Your app</text>
+<text x="716" y="115" class="mono">import 'brisa-ui'</text>
+<rect x="700" y="150" width="156" height="60" rx="10" class="card"/>
+<text x="716" y="175" class="b">Docs site</text>
+<text x="716" y="195" class="m">GitHub Pages</text>
+<rect x="40" y="320" width="290" height="112" rx="10" class="card"/>
+<text x="56" y="346" class="b">Vitest + Testing Library</text>
+<text x="56" y="370" class="m">· keyboard, ARIA, behaviour</text>
+<text x="56" y="390" class="m">· axe-core on every component</text>
+<text x="56" y="410" class="m">· WCAG contrast contract</text>
+<rect x="370" y="320" width="280" height="112" rx="10" class="card"/>
+<text x="386" y="346" class="b">GitHub Actions CI</text>
+<text x="386" y="370" class="m">lint · typecheck · test</text>
+<text x="386" y="390" class="m">build · gitleaks</text>
+<text x="386" y="414" class="lbl">must pass</text>
+<rect x="700" y="320" width="156" height="112" rx="10" class="card"/>
+<text x="716" y="346" class="b">Pages deploy</text>
+<text x="716" y="368" class="mono">deploy-pages</text>
+<text x="716" y="390" class="m">on push to main</text>
+<path d="M196,130 L256,130" class="e" marker-end="url(#ah)"/>
+<path d="M408,130 L460,130" class="e" marker-end="url(#ah)"/>
+<path d="M650,100 L700,100" class="e" marker-end="url(#ah)"/>
+<path d="M650,180 L700,180" class="e" marker-end="url(#ah)"/>
+<path d="M555,190 L555,262 L185,262 L185,320" class="e" marker-end="url(#ah)"/>
+<path d="M330,375 L370,375" class="e" marker-end="url(#ah)"/>
+<path d="M650,375 L700,375" class="e" marker-end="url(#ah)"/>
+<path d="M778,320 L778,210" class="e" marker-end="url(#ah)"/>
+<text x="226" y="121" class="lbl" text-anchor="middle">remap</text>
+<text x="434" y="121" class="lbl" text-anchor="middle">read</text>
+<text x="370" y="256" class="lbl" text-anchor="middle">tested by</text>
+<text x="790" y="268" class="lbl">publishes</text>
+<path d="M196,130 L256,130" class="hl h0"/>
+<g class="pk p0"><circle r="9" class="halo"/><circle r="4.5" class="dot"/></g>
+<path d="M408,130 L460,130" class="hl h1"/>
+<g class="pk p1"><circle r="9" class="halo"/><circle r="4.5" class="dot"/></g>
+<path d="M650,100 L700,100" class="hl h2"/>
+<g class="pk p2"><circle r="9" class="halo"/><circle r="4.5" class="dot"/></g>
+<path d="M650,180 L700,180" class="hl h3"/>
+<g class="pk p3"><circle r="9" class="halo"/><circle r="4.5" class="dot"/></g>
+<path d="M555,190 L555,262 L185,262 L185,320" class="hl h4"/>
+<g class="pk p4"><circle r="9" class="halo"/><circle r="4.5" class="dot"/></g>
+<path d="M330,375 L370,375" class="hl h5"/>
+<g class="pk p5"><circle r="9" class="halo"/><circle r="4.5" class="dot"/></g>
+<path d="M650,375 L700,375" class="hl h6"/>
+<g class="pk p6"><circle r="9" class="halo"/><circle r="4.5" class="dot"/></g>
+<path d="M778,320 L778,210" class="hl h7"/>
+<g class="pk p7"><circle r="9" class="halo"/><circle r="4.5" class="dot"/></g>
+</svg>

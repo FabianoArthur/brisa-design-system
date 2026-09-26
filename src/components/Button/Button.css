@@ -1,0 +1,130 @@
+.br-button {
+  --_bg: var(--br-color-accent);
+  --_bg-hover: var(--br-color-accent-hover);
+  --_fg: var(--br-color-on-accent);
+  --_border: transparent;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--br-space-2);
+  min-height: var(--br-control-md);
+  padding: 0 var(--br-space-4);
+  font: inherit;
+  font-size: var(--br-text-sm);
+  font-weight: var(--br-weight-semibold);
+  line-height: 1;
+  color: var(--_fg);
+  background: var(--_bg);
+  border: 1px solid var(--_border);
+  border-radius: var(--br-radius-md);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--br-duration-fast) var(--br-ease-out),
+    border-color var(--br-duration-fast) var(--br-ease-out),
+    transform var(--br-duration-fast) var(--br-ease-out);
+}
+
+.br-button:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--_bg-hover);
+}
+
+.br-button:active:not(:disabled, [aria-disabled='true']) {
+  transform: translateY(1px);
+}
+
+.br-button:focus-visible {
+  outline: 2px solid var(--br-color-focus);
+  outline-offset: 2px;
+}
+
+.br-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.br-button--secondary {
+  --_bg: var(--br-color-surface);
+  --_bg-hover: var(--br-color-surface-hover);
+  --_fg: var(--br-color-text);
+  --_border: var(--br-color-border-strong);
+}
+
+.br-button--ghost {
+  --_bg: transparent;
+  --_bg-hover: var(--br-color-surface-hover);
+  --_fg: var(--br-color-accent-text);
+}
+
+.br-button--danger {
+  --_bg: var(--br-color-danger);
+  --_bg-hover: var(--br-color-danger-text);
+  --_fg: var(--br-color-on-danger);
+}
+
+.br-button--sm {
+  min-height: var(--br-control-sm);
+  padding: 0 var(--br-space-3);
+  font-size: var(--br-text-xs);
+}
+
+.br-button--lg {
+  min-height: var(--br-control-lg);
+  padding: 0 var(--br-space-6);
+  font-size: var(--br-text-md);
+}
+
+.br-button--icon-only {
+  width: var(--br-control-md);
+  padding: 0;
+}
+
+.br-button--sm.br-button--icon-only {
+  width: var(--br-control-sm);
+}
+
+.br-button--lg.br-button--icon-only {
+  width: var(--br-control-lg);
+}
+
+.br-button--full {
+  width: 100%;
+}
+
+.br-button--loading {
+  cursor: progress;
+}
+
+.br-button__icon {
+  display: inline-flex;
+}
+
+.br-button__icon svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.br-button__spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: br-spin 700ms linear infinite;
+}
+
+@keyframes br-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .br-button,
+  .br-button__spinner {
+    transition: none;
+    animation-duration: 2s;
+  }
+}

@@ -1,0 +1,18 @@
+.br-select {
+  position: relative;
+}
+
+.br-select__control {
+  appearance: none;
+  padding-right: var(--br-space-10);
+  cursor: pointer;
+}
+
+.br-select__chevron {
+  position: absolute;
+  top: 50%;
+  right: var(--br-space-3);
+  translate: 0 -50%;
+  color: var(--br-color-text-muted);
+  pointer-events: none;
+}
