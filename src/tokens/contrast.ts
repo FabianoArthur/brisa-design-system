@@ -83,7 +83,8 @@ export function readThemes(css: string): Themes {
     else if (/:root|data-theme=['"]?light/.test(selector)) Object.assign(base, decls);
   }
   const mediaDark: Declarations = {};
-  for (const m of mediaBody.matchAll(/([^{}]+)\{([^{}]*)\}/g)) Object.assign(mediaDark, declarations(m[2]!));
+  for (const m of mediaBody.matchAll(/([^{}]+)\{([^{}]*)\}/g))
+    Object.assign(mediaDark, declarations(m[2]!));
 
   return {
     light: resolve(base),

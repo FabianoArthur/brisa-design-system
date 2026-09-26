@@ -8,8 +8,7 @@ function mockMatchMedia(initial: boolean) {
     matches: initial,
     media: '(prefers-color-scheme: dark)',
     addEventListener: (_: string, cb: (e: MediaQueryListEvent) => void) => listeners.add(cb),
-    removeEventListener: (_: string, cb: (e: MediaQueryListEvent) => void) =>
-      listeners.delete(cb),
+    removeEventListener: (_: string, cb: (e: MediaQueryListEvent) => void) => listeners.delete(cb),
   };
   vi.spyOn(window, 'matchMedia').mockReturnValue(mql as unknown as MediaQueryList);
   return (matches: boolean) => {

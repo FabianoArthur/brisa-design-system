@@ -1,0 +1,108 @@
+.br-toaster {
+  position: fixed;
+  right: var(--br-space-4);
+  bottom: var(--br-space-4);
+  left: var(--br-space-4);
+  z-index: var(--br-z-toast);
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.br-toaster__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--br-space-2);
+  width: min(100%, 24rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.br-toast {
+  --_tone: var(--br-color-info-text);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--br-space-3);
+  padding: var(--br-space-3) var(--br-space-3) var(--br-space-3) var(--br-space-5);
+  color: var(--br-color-text);
+  background: var(--br-color-surface);
+  border: 1px solid var(--br-color-border);
+  border-radius: var(--br-radius-md);
+  box-shadow: var(--br-shadow-md);
+  overflow: hidden;
+  pointer-events: auto;
+  animation: br-toast-in var(--br-duration-slow) var(--br-ease-out);
+}
+
+.br-toast--success {
+  --_tone: var(--br-color-success-text);
+}
+
+.br-toast--warning {
+  --_tone: var(--br-color-warning-text);
+}
+
+.br-toast--danger {
+  --_tone: var(--br-color-danger-text);
+}
+
+.br-toast__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--_tone);
+}
+
+.br-toast__content {
+  display: grid;
+  gap: 2px;
+}
+
+.br-toast__title {
+  margin: 0;
+  font-weight: var(--br-weight-semibold);
+}
+
+.br-toast__description {
+  margin: 0;
+  font-size: var(--br-text-sm);
+  color: var(--br-color-text-muted);
+}
+
+.br-toast__dismiss {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--br-color-text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--br-radius-sm);
+  cursor: pointer;
+}
+
+.br-toast__dismiss:hover {
+  color: var(--br-color-text);
+  background: var(--br-color-surface-hover);
+}
+
+.br-toast__dismiss:focus-visible {
+  outline: 2px solid var(--br-color-focus);
+  outline-offset: 1px;
+}
+
+@keyframes br-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .br-toast {
+    animation: none;
+  }
+}

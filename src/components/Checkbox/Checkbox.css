@@ -1,0 +1,101 @@
+/* Shared by Checkbox and RadioGroup options. */
+.br-check {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--br-space-3);
+}
+
+.br-check__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.br-check__box {
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.1rem;
+  background: var(--br-color-surface);
+  border: 1.5px solid var(--br-color-border-strong);
+  border-radius: var(--br-radius-sm);
+  transition:
+    background-color var(--br-duration-fast) var(--br-ease-out),
+    border-color var(--br-duration-fast) var(--br-ease-out);
+  pointer-events: none;
+}
+
+.br-check__box svg {
+  grid-area: 1 / 1;
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: none;
+  stroke: var(--br-color-on-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.br-check__input:hover:not(:disabled) + .br-check__box {
+  border-color: var(--br-color-accent);
+}
+
+.br-check__input:checked + .br-check__box,
+.br-check__input:indeterminate + .br-check__box {
+  background: var(--br-color-accent);
+  border-color: var(--br-color-accent);
+}
+
+.br-check__input:checked:not(:indeterminate) + .br-check__box .br-check__tick,
+.br-check__input:indeterminate + .br-check__box .br-check__dash {
+  opacity: 1;
+}
+
+.br-check__input:focus-visible + .br-check__box {
+  outline: 2px solid var(--br-color-focus);
+  outline-offset: 2px;
+}
+
+.br-check__input:disabled {
+  cursor: not-allowed;
+}
+
+.br-check__input:disabled + .br-check__box,
+.br-check__input:disabled ~ .br-check__text {
+  opacity: 0.55;
+}
+
+.br-check__text {
+  display: grid;
+  gap: 2px;
+}
+
+.br-check__label {
+  font-size: var(--br-text-md);
+  color: var(--br-color-text);
+  cursor: pointer;
+}
+
+.br-check__desc {
+  font-size: var(--br-text-sm);
+  color: var(--br-color-text-muted);
+}
+
+/* Radio variant */
+.br-check--radio .br-check__box {
+  border-radius: var(--br-radius-full);
+}
+
+.br-check--radio .br-check__input:checked + .br-check__box {
+  background: var(--br-color-surface);
+  box-shadow: inset 0 0 0 4px var(--br-color-accent);
+}

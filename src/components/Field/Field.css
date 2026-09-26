@@ -1,0 +1,71 @@
+.br-field {
+  display: grid;
+  gap: var(--br-space-1);
+  min-width: 0;
+}
+
+.br-field__label {
+  font-size: var(--br-text-sm);
+  font-weight: var(--br-weight-semibold);
+  color: var(--br-color-text);
+}
+
+.br-field__required {
+  color: var(--br-color-danger-text);
+}
+
+.br-field__hint {
+  margin: 0;
+  font-size: var(--br-text-sm);
+  color: var(--br-color-text-muted);
+}
+
+.br-field__error {
+  display: flex;
+  align-items: center;
+  gap: var(--br-space-1);
+  margin: 0;
+  font-size: var(--br-text-sm);
+  font-weight: var(--br-weight-medium);
+  color: var(--br-color-danger-text);
+}
+
+/* Shared look for text-like controls. */
+.br-control {
+  width: 100%;
+  min-height: var(--br-control-md);
+  padding: var(--br-space-2) var(--br-space-3);
+  font: inherit;
+  font-size: var(--br-text-md);
+  color: var(--br-color-text);
+  background: var(--br-color-surface);
+  border: 1px solid var(--br-color-border-strong);
+  border-radius: var(--br-radius-md);
+  transition:
+    border-color var(--br-duration-fast) var(--br-ease-out),
+    box-shadow var(--br-duration-fast) var(--br-ease-out);
+}
+
+.br-control::placeholder {
+  color: var(--br-color-text-muted);
+}
+
+.br-control:hover:not(:disabled) {
+  border-color: var(--br-color-text-muted);
+}
+
+.br-control:focus-visible {
+  outline: 2px solid var(--br-color-focus);
+  outline-offset: 1px;
+  border-color: var(--br-color-focus);
+}
+
+.br-control[aria-invalid='true'] {
+  border-color: var(--br-color-danger);
+}
+
+.br-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  background: var(--br-color-surface-sunken);
+}
