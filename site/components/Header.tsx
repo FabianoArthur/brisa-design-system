@@ -43,7 +43,7 @@ export function Header() {
         </fieldset>
         <a
           className="icon-link"
-          href="https://github.com/FabianoArthur/teste-claude-design"
+          href="https://github.com/FabianoArthur/brisa-design-system"
           aria-label="Source code on GitHub"
         >
           <svg viewBox="0 0 16 16" aria-hidden="true">
