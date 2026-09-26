@@ -4,12 +4,12 @@
 
 **An accessible React + TypeScript design system with themeable tokens, light and dark themes, and a live docs site.**
 
-[![CI](https://github.com/FabianoArthur/teste-claude-design/actions/workflows/ci.yml/badge.svg)](https://github.com/FabianoArthur/teste-claude-design/actions/workflows/ci.yml)
+[![CI](https://github.com/FabianoArthur/brisa-design-system/actions/workflows/ci.yml/badge.svg)](https://github.com/FabianoArthur/brisa-design-system/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766f.svg)](LICENSE)
 
 **English** · [Português (Brasil)](README.pt-BR.md)
 
-[**Live docs →**](https://fabianoarthur.github.io/teste-claude-design/)
+[**Live docs →**](https://fabianoarthur.github.io/brisa-design-system/)
 
 </div>
 
@@ -63,8 +63,8 @@ scripts/         diagram generator for this README
 Requires Node.js 20+.
 
 ```bash
-git clone https://github.com/FabianoArthur/teste-claude-design.git
-cd teste-claude-design
+git clone https://github.com/FabianoArthur/brisa-design-system.git
+cd brisa-design-system
 npm ci
 npm run dev          # docs site at http://localhost:5173
 ```
